@@ -38,7 +38,7 @@ export function Listproducts(props) {
   console.log(propductWhatsApp);
 
   const format = (number) => {
-    return number.toLocaleString("es-ES", { useGrouping: true }); // Cambia 'es-ES' por tu configuración regional
+    return number.toLocaleString("es-ES", { minimumFractionDigits: 0 }); // Cambia 'es-ES' por tu configuración regional
   };
 
   const toggleModal = () => {
@@ -72,25 +72,21 @@ export function Listproducts(props) {
     toggleModal2();
   };
 
-
   const addProductAlternaToWhatsApp = (data) => {
     setPropductAlternaWhatsApp(data);
     toggleModal2();
   };
-
 
   const addDataToWhatsApp = () => {
     if (propductWhatsApp != "") {
       const whatsappLink = generateWhatsAppLink(
         selectedItem,
         BASE_NAME + propductWhatsApp
-      )
+      );
 
       window.location.href = whatsappLink;
       toggleModal2();
-    }
-
-    else {
+    } else {
       const whatsappLink = generateWhatsAppLink(
         selectedItem,
         propductAlternaWhatsApp
@@ -115,7 +111,6 @@ export function Listproducts(props) {
                     src={BASE_NAME + product.productData.images}
                   />
                 </Link>
-
               ) : (
                 <Link href={`/${product.productData.slug}`}>
                   <CardImg
@@ -145,11 +140,11 @@ export function Listproducts(props) {
                       onClick={() =>
                         addProductToWhatsApp(
                           product.productData.images +
-                          " " +
-                          product.productData.name_extend +
-                          " " +
-                          "Referencia: " +
-                          product.productData.ref
+                            " " +
+                            product.productData.name_extend +
+                            " " +
+                            "Referencia: " +
+                            product.productData.ref
                         )
                       }
                     >
@@ -161,11 +156,11 @@ export function Listproducts(props) {
                       onClick={() =>
                         addProductAlternaToWhatsApp(
                           product.productData.image_alterna +
-                          " " +
-                          product.productData.name_extend +
-                          " " +
-                          "Referencia: " +
-                          product.productData.ref
+                            " " +
+                            product.productData.name_extend +
+                            " " +
+                            "Referencia: " +
+                            product.productData.ref
                         )
                       }
                     >
