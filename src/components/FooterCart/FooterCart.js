@@ -50,9 +50,7 @@ export function FooterCart(props) {
 
   const addData = () => {
     const whatsappLink = generateWhatsAppLink(selectedItem, product);
-
     window.location.href = whatsappLink;
-
     toggleModal();
   };
 

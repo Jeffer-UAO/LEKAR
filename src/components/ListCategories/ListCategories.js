@@ -16,11 +16,21 @@ export function ListCategories(props) {
         <div className={styles.list}>
           {map(categories, (category) => (
             <div key={category.id} className={styles.card}>
-              <Link href={`/products/${category.slug}`}>
+              {category.image ? (<Link href={`/products/${category.slug}`}>
                 <CardImg
                   alt="Card image cap"
                   src={BASE_NAME + category.image}
-                  className={styles.skeleton}
+                />
+                <div className={styles.category}>
+                  <CardTitle className={styles.title}>
+                    <h2>{category.name}</h2>
+                    <h6>ver más</h6>
+                  </CardTitle>
+                </div>
+              </Link>) : (<Link href={`/products/${category.slug}`}>
+                <CardImg
+                  alt="Card image cap"
+                  src={category.image_alterna}
                 />
 
                 <div className={styles.category}>
@@ -29,7 +39,7 @@ export function ListCategories(props) {
                     <h6>ver más</h6>
                   </CardTitle>
                 </div>
-              </Link>
+              </Link>)}
             </div>
           ))}
         </div>

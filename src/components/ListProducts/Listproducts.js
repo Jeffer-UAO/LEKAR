@@ -32,10 +32,13 @@ export function Listproducts(props) {
   const [isOpen2, setIsOpen2] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [idProduct, setIdPropduct] = useState();
-  const [propductWhatsApp, setPropductWhatsApp] = useState();
+  const [propductWhatsApp, setPropductWhatsApp] = useState("");
+  const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
+
+  console.log(propductWhatsApp);
 
   const format = (number) => {
-    return number.toLocaleString("es-ES"); // Cambia 'es-ES' por tu configuración regional
+    return number.toLocaleString("es-ES", { useGrouping: true }); // Cambia 'es-ES' por tu configuración regional
   };
 
   const toggleModal = () => {
@@ -69,15 +72,33 @@ export function Listproducts(props) {
     toggleModal2();
   };
 
-  const addDataToWhatsApp = () => {
-    const whatsappLink = generateWhatsAppLink(
-      selectedItem,
-      BASE_NAME + propductWhatsApp
-    );
 
-    window.location.href = whatsappLink;
-
+  const addProductAlternaToWhatsApp = (data) => {
+    setPropductAlternaWhatsApp(data);
     toggleModal2();
+  };
+
+
+  const addDataToWhatsApp = () => {
+    if (propductWhatsApp != "") {
+      const whatsappLink = generateWhatsAppLink(
+        selectedItem,
+        BASE_NAME + propductWhatsApp
+      )
+
+      window.location.href = whatsappLink;
+      toggleModal2();
+    }
+
+    else {
+      const whatsappLink = generateWhatsAppLink(
+        selectedItem,
+        propductAlternaWhatsApp
+      );
+
+      window.location.href = whatsappLink;
+      toggleModal2();
+    }
   };
 
   return (
@@ -87,12 +108,22 @@ export function Listproducts(props) {
         {map(products, (product, index) => (
           <div key={index} className={styles.list__product}>
             <div>
-              <Link href={`/${product.productData.slug}`}>
-                <CardImg
-                  alt="Card image cap"
-                  src={BASE_NAME + product.productData.images}
-                />
-              </Link>
+              {product.productData.images ? (
+                <Link href={`/${product.productData.slug}`}>
+                  <CardImg
+                    alt="Card image cap"
+                    src={BASE_NAME + product.productData.images}
+                  />
+                </Link>
+
+              ) : (
+                <Link href={`/${product.productData.slug}`}>
+                  <CardImg
+                    alt="Card image cap"
+                    src={product.productData.image_alterna}
+                  />
+                </Link>
+              )}
               <div className={styles.product}>
                 <CardTitle className={styles.title}>
                   <h5>{product.productData.name_extend}</h5>
@@ -100,32 +131,47 @@ export function Listproducts(props) {
 
                 <div className={styles.price}>
                   <CardSubtitle>
-                    {product.productData.price2 > 0 && (
-                      <h6>Por mayor $ {product.productData.price2}</h6>
+                    {product.productData.price1 > 1 && (
+                      <h5>$ {format(product.productData.price1)}</h5>
                     )}
-                    {product.productData.price1 > 0 && (
-                      <>
-                        <h6>COP.</h6>
-                        <h5>{format(product.productData.price1)}</h5>
-                      </>
+                    {product.productData.price2 > 1 && (
+                      <h5>POR MAYOR $ {format(product.productData.price2)}</h5>
                     )}
                   </CardSubtitle>
 
-                  <div
-                    className={styles.whatsapp}
-                    onClick={() =>
-                      addProductToWhatsApp(
-                        product.productData.images +
+                  {product.productData.images ? (
+                    <div
+                      className={styles.whatsapp}
+                      onClick={() =>
+                        addProductToWhatsApp(
+                          product.productData.images +
                           " " +
                           product.productData.name_extend +
                           " " +
                           "Referencia: " +
                           product.productData.ref
-                      )
-                    }
-                  >
-                    <BsWhatsapp size={25} color="white" />
-                  </div>
+                        )
+                      }
+                    >
+                      <BsWhatsapp size={25} color="white" />
+                    </div>
+                  ) : (
+                    <div
+                      className={styles.whatsapp}
+                      onClick={() =>
+                        addProductAlternaToWhatsApp(
+                          product.productData.image_alterna +
+                          " " +
+                          product.productData.name_extend +
+                          " " +
+                          "Referencia: " +
+                          product.productData.ref
+                        )
+                      }
+                    >
+                      <BsWhatsapp size={25} color="white" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -167,7 +213,7 @@ export function Listproducts(props) {
       </Modal>
 
       <Modal centered isOpen={isOpen2} toggle={toggleModal2}>
-        <ModalHeader toggle={toggleModal2}>Seleccione una Linea</ModalHeader>
+        <ModalHeader toggle={toggleModal2}>Seleccione una Línea</ModalHeader>
 
         <ModalBody>
           <FormGroup>

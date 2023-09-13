@@ -24,12 +24,13 @@ export function DetailProduct(props) {
 
   const [productData, setProductData] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [propductWhatsApp, setPropductWhatsApp] = useState();
+  const [propductWhatsApp, setPropductWhatsApp] = useState("");
+  const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
 
   const format = (number) => {
-    return number.toLocaleString("es-ES"); // Cambia 'es-ES' por tu configuración regional
+    return number.toLocaleString("es-ES", { useGrouping: true }); // Cambia 'es-ES' por tu configuración regional
   };
-  
+
   useEffect(() => {
     setProductData(product[0]);
   }, []);
@@ -50,54 +51,90 @@ export function DetailProduct(props) {
     toggleModal();
   };
 
-  const addDataToWhatsApp = () => {
-    const whatsappLink = generateWhatsAppLink(
-      selectedItem,
-      BASE_NAME + propductWhatsApp
-    );
-
-    window.location.href = whatsappLink;
-
+  const addProductAlternaToWhatsApp = (data) => {
+    setPropductAlternaWhatsApp(data);
     toggleModal();
+  };
+
+
+  const addDataToWhatsApp = () => {
+    if (propductWhatsApp != "") {
+      const whatsappLink = generateWhatsAppLink(
+        selectedItem,
+        BASE_NAME + propductWhatsApp
+      )
+
+      window.location.href = whatsappLink;
+      toggleModal();
+    }
+
+    else {
+      const whatsappLink = generateWhatsAppLink(
+        selectedItem,
+        propductAlternaWhatsApp
+      );
+
+      window.location.href = whatsappLink;
+      toggleModal();
+    }
   };
 
   if (product) {
     return (
       <div className={styles.detailProduct}>
         <div className={styles.product} id="seccion-1">
-          <CardImg alt="Card image cap" src={BASE_NAME + productData.images} />
+          {productData.images ? (
+            <CardImg alt="Card image cap" src={BASE_NAME + productData.images} />
+          ) : (
+            <CardImg alt="Card image cap" src={productData.image_alterna} />
+          )}
 
           <div className={styles.description}>
             <CardTitle className={styles.title}>
               <h5 className={styles.name_extend}>{productData.name_extend}</h5>
               <div className={styles.price}>
-                {productData.price2 > 0 && (
-                  <h6>Por mayor $ {productData.price2}</h6>
+                {productData.price1 > 1 && (
+                  <h5>$ {format(productData.price1)} </h5>
                 )}
-                {productData.price1 > 0 && (
-                  <>
-                    <h6>COP.</h6>
-                    <h5> {format(productData.price1)} </h5>
-                  </>
+                {productData.price2 > 1 && (
+                  <h5>POR MAYOR $ {format(productData.price2)}</h5>
                 )}
               </div>
             </CardTitle>
 
-            <div
-              className={styles.whatsapp}
-              onClick={() =>
-                addProductToWhatsApp(
-                  productData.images +
+            {productData.images ? (
+              <div
+                className={styles.whatsapp}
+                onClick={() =>
+                  addProductToWhatsApp(
+                    productData.images +
                     " " +
                     productData.name_extend +
                     " " +
                     "Referencia: " +
                     productData.ref
-                )
-              }
-            >
-              <BsWhatsapp size={25} color="white" />
-            </div>
+                  )
+                }
+              >
+                <BsWhatsapp size={25} color="white" />
+              </div>
+            ) : (
+              <div
+                className={styles.whatsapp}
+                onClick={() =>
+                  addProductAlternaToWhatsApp(
+                    productData.image_alterna +
+                    " " +
+                    productData.name_extend +
+                    " " +
+                    "Referencia: " +
+                    productData.ref
+                  )
+                }
+              >
+                <BsWhatsapp size={25} color="white" />
+              </div>
+            )}
             <FichaTecnica />
           </div>
         </div>
@@ -107,24 +144,49 @@ export function DetailProduct(props) {
 
           <div className={styles.list}>
             {map(relate, (product, index) => (
-              <div
-                key={index}
-                className={styles.list__product2}
-                onClick={() => changeDetail(product)}
-              >
-                <CardImg
-                  alt="Card image cap"
-                  src={BASE_NAME + product.images}
-                />
+              <div key={index}>
+                {
+                  product.images ? (
+                    <div
+                      className={styles.list__product2}
+                      onClick={() => changeDetail(product)}
+                    >
+                      <CardImg
+                        alt="Card image cap"
+                        src={BASE_NAME + product.images}
+                      />
 
-                <div className={styles.name}>
-                  <CardTitle>
-                    <h5>
-                      {product.name} {product.name_extend}
-                    </h5>
-                    {product.price1 !== null && <h6>$ {product.price1}</h6>}
-                  </CardTitle>
-                </div>
+                      <div className={styles.name}>
+                        <CardTitle>
+                          <h5>
+                            {product.name_extend}
+                          </h5>
+                          <h6>COP. {format(product.price1)}</h6>
+                        </CardTitle>
+                      </div>
+                    </div>
+                  ) : (
+
+                    <div
+                      className={styles.list__product2}
+                      onClick={() => changeDetail(product)}
+                    >
+                      <CardImg
+                        alt="Card image cap"
+                        src={product.image_alterna}
+                      />
+
+                      <div className={styles.name}>
+                        <CardTitle>
+                          <h5>
+                            {product.name_extend}
+                          </h5>
+                          <h6>COP. {format(product.price1)}</h6>
+                        </CardTitle>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
             ))}
           </div>

@@ -42,29 +42,36 @@ export default function CartPage() {
     (async () => {
       try {
         const newObjectArray = [];
- 
+
         for (const record of product) {
           const newRecord = {};
 
           for (const key in record) {
             if (
               Object.hasOwnProperty.call(record, key) &&
-              ["name_extend", "quantity", "images", "ref"].includes(key)
+              ["name_extend", "quantity", "images", "image_alterna", "ref"].includes(key)
             ) {
               newRecord[key] = record[key];
             }
           }
 
-          newObjectArray.push({         
-           Producto: newRecord.name_extend,
-            Referencia: newRecord.ref,
-            Cantidad: newRecord.quantity,
-            Imagen: BASE_NAME + newRecord.images,          
-          },);
+          if (newRecord.images) {
+            newObjectArray.push({
+              Producto: newRecord.name_extend,
+              Referencia: newRecord.ref,
+              Imagen: BASE_NAME + newRecord.images,
+            },);
+          } else {
+            newObjectArray.push({
+              Producto: newRecord.name_extend,
+              Referencia: newRecord.ref,
+              Imagen: newRecord.image_alterna,
+            },);
+          }
         }
-        const newArrayAsString = JSON.stringify(newObjectArray, null, 2);   
+        const newArrayAsString = JSON.stringify(newObjectArray, null, 2);
 
-        setNewProduct( `Pedido No.  ${identificadorUnico} ${newArrayAsString}`);
+        setNewProduct(`Pedido No.  ${identificadorUnico} ${newArrayAsString}`);
       } catch (error) {
         console.error(error);
       }
@@ -74,7 +81,7 @@ export default function CartPage() {
   return (
     <>
       <BasicLayout>
-      <Redes />
+        <Redes />
 
         {load ? (
           <h1>Cargando ...</h1>
@@ -90,7 +97,7 @@ export default function CartPage() {
           </>
         )}
 
-        <FooterCart product={newProduct}/>
+        <FooterCart product={newProduct} />
         <Footer />
       </BasicLayout>
     </>
@@ -112,7 +119,7 @@ function generarIdentificadorUnico() {
     identificador += numeros[numeroAleatorio];
   }
 
-  
+
 
   return identificador;
 }
