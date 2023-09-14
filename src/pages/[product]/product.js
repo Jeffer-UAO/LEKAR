@@ -9,7 +9,7 @@ export default function ProductPage(props) {
     <div>
       <BasicLayout>
         <Redes />
-        <DetailProduct product={product[0]} relate={relate} />
+        <DetailProduct product={product} relate={relate} />
         <FooterApp />
         <Footer />
       </BasicLayout>
