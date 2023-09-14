@@ -43,7 +43,39 @@ export function FooterApp() {
 
   return (
     <div className={styles.btnWhatsapp}>
-    
+      <div className={styles.paneluser}>
+        <BtnLink link={"/"} title={"HOME"} logo={<AiOutlineHome size={20} />} />
+        <BtnLink
+          link={"/featured"}
+          title={"EXCL"}
+          logo={<MdOutlineCategory size={20} />}
+        />
+
+        <Button
+          className={styles.whatsapp}
+          color="succefull"
+          onClick={() => toggleModal()}
+        >
+          <BsWhatsapp size={30} color="green" />
+        </Button>
+
+        <div className={styles.cart}>
+          <p>{total}</p>
+          <BtnLink
+            link={"/cart"}
+            title={"CART"}
+            logo={<AiOutlineShoppingCart size={20} />}
+          />
+        </div>
+
+        <BtnLink
+          // link={"https://lekar.catalogointeractivo.com.co/admin-dashboard/"}
+          link={"https://planos.centronube.com/admin-dashboard/"}
+          title={"ADMI"}
+          logo={<CiUser size={20} />}
+        />
+      </div>
+
       <Modal centered isOpen={isOpen} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Seleccione una Linea</ModalHeader>
 
