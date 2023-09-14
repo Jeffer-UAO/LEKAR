@@ -69,7 +69,8 @@ export function FooterApp() {
         </div>
 
         <BtnLink
-          link={"https://lekar.catalogointeractivo.com.co/admin-dashboard/"}
+          // link={"https://lekar.catalogointeractivo.com.co/admin-dashboard/"}
+          link={"https://planos.centronube.com/admin-dashboard/"}
           title={"ADMI"}
           logo={<CiUser size={20} />}
         />
