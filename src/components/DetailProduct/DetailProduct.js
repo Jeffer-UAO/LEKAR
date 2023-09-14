@@ -21,13 +21,14 @@ import styles from "./DetailProduct.module.scss";
 
 export function DetailProduct(props) {
   const { product, relate } = props;
-  const { getGalleryByCode, gallery, loading, error } = useGallery();
+  const { getGalleryByCode, gallery, loading, error } = useGallery()
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
 
   console.log(gallery);
 
-  const [productData, setProductData] = useState("");
+
+  const [productData, setProductData] = useState(product);
   const [isOpen, setIsOpen] = useState(false);
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
@@ -37,13 +38,12 @@ export function DetailProduct(props) {
   };
 
   useEffect(() => {
-    setProductData(product[0]);
     getGalleryByCode(productData.codigo);
   }, []);
 
   const changeDetail = (data) => {
     setProductData(data);
-    getGalleryByCode(data.codigo);
+    getGalleryByCode(data.codigo)
     window.scrollTo(0, 0);
   };
 
@@ -87,6 +87,7 @@ export function DetailProduct(props) {
     return (
       <div className={styles.detailProduct}>
         <div className={styles.product} id="seccion-1">
+
           <ImageCarousel images={gallery} />
 
           <div className={styles.description}>
@@ -108,11 +109,11 @@ export function DetailProduct(props) {
                 onClick={() =>
                   addProductToWhatsApp(
                     productData.images +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                    " " +
+                    productData.name_extend +
+                    " " +
+                    "Referencia: " +
+                    productData.ref
                   )
                 }
               >
@@ -124,11 +125,11 @@ export function DetailProduct(props) {
                 onClick={() =>
                   addProductAlternaToWhatsApp(
                     productData.image_alterna +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                    " " +
+                    productData.name_extend +
+                    " " +
+                    "Referencia: " +
+                    productData.ref
                   )
                 }
               >
