@@ -25,23 +25,20 @@ export function DetailProduct(props) {
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
 
-  console.log(gallery);
 
   const [productData, setProductData] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
 
+
+  console.log(product);
   const format = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Cambia 'es-ES' por tu configuración regional
   };
 
   useEffect(() => {
-    setProductData(product[0]);
-  }, []);
-
-  useEffect(() => {
-    getGalleryByCode(productData?.codigo);
+    getGalleryByCode(productData.codigo);
   }, []);
 
   const changeDetail = (data) => {
