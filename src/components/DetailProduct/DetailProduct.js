@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { map } from "lodash";
 import { BASE_NAME } from "@/config/constants";
-import { useWhatsApp } from "@/hooks/useWhatsApp";
+import { useWhatsApp, useGallery } from "@/hooks";
+import { ImageCarousel } from "../ImageCarousel";
+
 import { FichaTecnica } from "../FichaTecnica";
 import {
   CardImg,
@@ -19,24 +21,29 @@ import styles from "./DetailProduct.module.scss";
 
 export function DetailProduct(props) {
   const { product, relate } = props;
+  const { getGalleryByCode, gallery, loading, error } = useGallery()
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
 
-  const [productData, setProductData] = useState("");
+  console.log(gallery);
+
+
+  const [productData, setProductData] = useState(product[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
 
   const format = (number) => {
-    return number.toLocaleString("es-ES", { useGrouping: true }); // Cambia 'es-ES' por tu configuración regional
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Cambia 'es-ES' por tu configuración regional
   };
 
   useEffect(() => {
-    setProductData(product[0]);
+    getGalleryByCode(productData.codigo);
   }, []);
 
   const changeDetail = (data) => {
     setProductData(data);
+    getGalleryByCode(data.codigo)
     window.scrollTo(0, 0);
   };
 
@@ -56,19 +63,16 @@ export function DetailProduct(props) {
     toggleModal();
   };
 
-
   const addDataToWhatsApp = () => {
     if (propductWhatsApp != "") {
       const whatsappLink = generateWhatsAppLink(
         selectedItem,
         BASE_NAME + propductWhatsApp
-      )
+      );
 
       window.location.href = whatsappLink;
       toggleModal();
-    }
-
-    else {
+    } else {
       const whatsappLink = generateWhatsAppLink(
         selectedItem,
         propductAlternaWhatsApp
@@ -83,11 +87,8 @@ export function DetailProduct(props) {
     return (
       <div className={styles.detailProduct}>
         <div className={styles.product} id="seccion-1">
-          {productData.images ? (
-            <CardImg alt="Card image cap" src={BASE_NAME + productData.images} />
-          ) : (
-            <CardImg alt="Card image cap" src={productData.image_alterna} />
-          )}
+
+          <ImageCarousel images={gallery} />
 
           <div className={styles.description}>
             <CardTitle className={styles.title}>
@@ -145,48 +146,38 @@ export function DetailProduct(props) {
           <div className={styles.list}>
             {map(relate, (product, index) => (
               <div key={index}>
-                {
-                  product.images ? (
-                    <div
-                      className={styles.list__product2}
-                      onClick={() => changeDetail(product)}
-                    >
-                      <CardImg
-                        alt="Card image cap"
-                        src={BASE_NAME + product.images}
-                      />
+                {product.images ? (
+                  <div
+                    className={styles.list__product2}
+                    onClick={() => changeDetail(product)}
+                  >
+                    <CardImg
+                      alt="Card image cap"
+                      src={BASE_NAME + product.images}
+                    />
 
-                      <div className={styles.name}>
-                        <CardTitle>
-                          <h5>
-                            {product.name_extend}
-                          </h5>
-                          <h6>COP. {format(product.price1)}</h6>
-                        </CardTitle>
-                      </div>
+                    <div className={styles.name}>
+                      <CardTitle>
+                        <h5>{product.name_extend}</h5>
+                        <h6>$. {format(product.price1)}</h6>
+                      </CardTitle>
                     </div>
-                  ) : (
+                  </div>
+                ) : (
+                  <div
+                    className={styles.list__product2}
+                    onClick={() => changeDetail(product)}
+                  >
+                    <CardImg alt="Card image cap" src={product.image_alterna} />
 
-                    <div
-                      className={styles.list__product2}
-                      onClick={() => changeDetail(product)}
-                    >
-                      <CardImg
-                        alt="Card image cap"
-                        src={product.image_alterna}
-                      />
-
-                      <div className={styles.name}>
-                        <CardTitle>
-                          <h5>
-                            {product.name_extend}
-                          </h5>
-                          <h6>COP. {format(product.price1)}</h6>
-                        </CardTitle>
-                      </div>
+                    <div className={styles.name}>
+                      <CardTitle>
+                        <h5>{product.name_extend}</h5>
+                        <h6>$. {format(product.price1)}</h6>
+                      </CardTitle>
                     </div>
-                  )
-                }
+                  </div>
+                )}
               </div>
             ))}
           </div>

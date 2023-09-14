@@ -14,7 +14,7 @@ export function ListCart(props) {
   const { product } = props;
   const { loading, decreaseCart, incrementCart, deleteCart } = useCart();
   const format = (number) => {
-    return number.toLocaleString("es-ES"); // Cambia 'es-ES' por tu configuración regional
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Cambia 'es-ES' por tu configuración regional
   };
 
 
@@ -45,7 +45,7 @@ export function ListCart(props) {
             <div className={styles.detalle}>
               <p className={styles.name}>{item.name_extend}</p>
 
-              <p className={styles.price}>COP. {format(item.price1)} </p>
+              <p className={styles.price}>$. {format(item.price1)} </p>
               {/* <p className={styles.price}>Mayor: $ {item.price2}</p> */}
 
 

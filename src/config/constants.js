@@ -1,5 +1,6 @@
 
-export const BASE_API = `https://lekar.catalogointeractivo.com.co`;
+// export const BASE_API = `https://lekar.catalogointeractivo.com.co`;
+export const BASE_API = `https://planos.centronube.com`;
 
 
 export const SEARCH_HISTORY = "search-history";

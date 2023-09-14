@@ -35,10 +35,8 @@ export function Listproducts(props) {
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
 
-  console.log(propductWhatsApp);
-
   const format = (number) => {
-    return number.toLocaleString("es-ES", { minimumFractionDigits: 0 }); // Cambia 'es-ES' por tu configuración regional
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Cambia 'es-ES' por tu configuración regional
   };
 
   const toggleModal = () => {
