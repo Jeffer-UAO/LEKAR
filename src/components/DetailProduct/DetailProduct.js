@@ -28,7 +28,7 @@ export function DetailProduct(props) {
   console.log(gallery);
 
 
-  const [productData, setProductData] = useState(product);
+  const [productData, setProductData] = useState(product[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
