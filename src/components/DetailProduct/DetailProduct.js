@@ -25,19 +25,17 @@ import styles from "./DetailProduct.module.scss";
 export function DetailProduct(props) {
   const { product, relate } = props;
   const { addCart } = useCart();
-  const { getGalleryByCode, gallery, loading, error } = useGallery()
+  const { getGalleryByCode, gallery, loading, error } = useGallery();
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
 
-
-  const [productData, setProductData] = useState(product[0]);
+  const [productData, setProductData] = useState("");
   const [idProduct, setIdPropduct] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [propductWhatsApp, setPropductWhatsApp] = useState("");
   const [propductAlternaWhatsApp, setPropductAlternaWhatsApp] = useState("");
   const [quantity, setQuantity] = useState(1);
-
 
   const format = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Cambia 'es-ES' por tu configuración regional
@@ -47,17 +45,19 @@ export function DetailProduct(props) {
     getGalleryByCode(productData.codigo);
   }, []);
 
+  useEffect(() => {
+    setProductData(product[0]);
+  }, []);
+
   const changeDetail = (data) => {
     setProductData(data);
-    getGalleryByCode(data.codigo)
+    getGalleryByCode(data.codigo);
     window.scrollTo(0, 0);
   };
-
 
   //-----------------------------------------------
 
   const openCloseModal = () => setShowModal((prev) => !prev);
-
 
   const addProductId = (id) => {
     setIdPropduct(id);
@@ -76,9 +76,7 @@ export function DetailProduct(props) {
     setQuantity(value);
   };
 
-
   //-------------------------------------
-
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -119,28 +117,24 @@ export function DetailProduct(props) {
   if (product) {
     return (
       <>
-
         <div className={styles.detailProduct}>
           <div className={styles.product} id="seccion-1">
             {gallerySize > 0 ? (
               <ImageCarousel images={gallery} />
+            ) : productData.image ? (
+              <CardImg
+                alt="Card image cap"
+                src={BASE_NAME + productData.image}
+              />
             ) : (
-              (productData.image) ? (
-                <CardImg
-                  alt="Card image cap"
-                  src={BASE_NAME + productData.image}
-                />
-              ) : (
-                <CardImg
-                  alt="Card image cap"
-                  src={productData.image_alterna}
-                />
-              )
+              <CardImg alt="Card image cap" src={productData.image_alterna} />
             )}
 
             <div className={styles.description}>
               <CardTitle className={styles.title}>
-                <h5 className={styles.name_extend}>{productData.name_extend}</h5>
+                <h5 className={styles.name_extend}>
+                  {productData.name_extend}
+                </h5>
                 <div className={styles.price}>
                   {productData.price1 > 1 && (
                     <h5>$ {format(productData.price1)} </h5>
@@ -157,11 +151,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductToWhatsApp(
                       productData.images +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                        " " +
+                        productData.name_extend +
+                        " " +
+                        "Referencia: " +
+                        productData.ref
                     )
                   }
                 >
@@ -173,11 +167,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductAlternaToWhatsApp(
                       productData.image_alterna +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                        " " +
+                        productData.name_extend +
+                        " " +
+                        "Referencia: " +
+                        productData.ref
                     )
                   }
                 >
@@ -185,9 +179,7 @@ export function DetailProduct(props) {
                 </div>
               )}
               <h6>Disponible: {productData.qty}</h6>
-              <Button                
-                onClick={() => addProductId(productData.codigo)}
-              >
+              <Button onClick={() => addProductId(productData.codigo)}>
                 Agregar al Carrito
               </Button>
               <FichaTecnica />
@@ -222,7 +214,10 @@ export function DetailProduct(props) {
                       className={styles.list__product2}
                       onClick={() => changeDetail(product)}
                     >
-                      <CardImg alt="Card image cap" src={product.image_alterna} />
+                      <CardImg
+                        alt="Card image cap"
+                        src={product.image_alterna}
+                      />
 
                       <div className={styles.name}>
                         <CardTitle>
@@ -295,7 +290,6 @@ export function DetailProduct(props) {
           </Modal>
         </div>
       </>
-
     );
   } else {
     return <h5> La pagina no existe</h5>;
