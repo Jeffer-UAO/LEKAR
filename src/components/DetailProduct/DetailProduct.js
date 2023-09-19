@@ -182,7 +182,7 @@ export function DetailProduct(props) {
               <Button onClick={() => addProductId(productData.codigo)}>
                 Agregar al Carrito
               </Button>
-              <FichaTecnica />
+              <p>{productData.description}</p>
             </div>
           </div>
 

@@ -52,9 +52,9 @@ export function Footer() {
         <p className={styles.copyright}>
         LEKAR AUTOMOTRIZ Copyright © 2023. Todos los derechos
           reservados <br />
-          Desarrollado por: Jeffer Quiñones <br />
+          Desarrollado por: SUPRAINNOVATION.SAS <br />
           Cel: 300 530 9990
-          Versión 5.0.2
+          Versión 6.0.0
         </p>
       </div>
     </div>
