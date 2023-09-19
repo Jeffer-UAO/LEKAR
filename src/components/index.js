@@ -14,3 +14,4 @@ export * from "./Layout";
  export * from "./ListCart";
  export * from "./FooterCart";
  export * from "./Redes";
+ export * from "./SearchTable";

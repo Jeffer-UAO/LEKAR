@@ -1,17 +1,24 @@
-import styles from './ModalBasic.module.scss';
+import React from "react";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import styles from "./ModalBasic.module.scss"
 
-export const ModalBasic = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-
+export function ModalBasic(props) {
+  const { show, size, title, children, onClose } = props;
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={onClose}>
-          X
-        </button>
-        <div className={styles.content}>{children}</div>
-      </div>
+    <div>
+      <Modal
+      centered
+        toggle={onClose}
+        keyboard={true}
+        isOpen={show}
+        size={size}
+        className="modal-basic"
+   
+      >
+        {title && <ModalHeader toggle={onClose}>{title}</ModalHeader>}
+        <ModalBody>{children}</ModalBody>
+      </Modal>
     </div>
   );
-};
+}
 

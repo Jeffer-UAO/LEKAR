@@ -1,7 +1,6 @@
 import { CardImg, CardTitle } from "reactstrap";
 import { map } from "lodash";
 import { BASE_NAME } from "@/config/constants";
-import { ImageCarousel } from "../ImageCarousel";
 import Link from "next/link";
 
 
@@ -46,7 +45,7 @@ export function ListCategories(props) {
             </div>
           ))}
         </div>
-      
+
       </div>
     </div>
   );

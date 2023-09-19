@@ -1,11 +1,19 @@
 .detailProduct {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(255, 255, 255);
   width: 100%;
 
   img {
+    
     object-fit: cover;
     object-position: center center;
     aspect-ratio: 1/1;
+    max-width: 400px;
+  }
+  h6 {
+    white-space: nowrap;     
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    color: #b3b3b3;
   }
 
   .product {
@@ -17,7 +25,7 @@
       }
 
       .price {
-        
+
         justify-content: center;
         align-items: center;
 
@@ -26,12 +34,6 @@
           color: #fd384f;
           font-weight: 600;
         }
-
-        h6 {
-          color: #fd384f;
-          font-size: 1rem;
-          margin-right: 0.5rem;
-        }
       }
     }
 
@@ -39,6 +41,14 @@
       position: relative;
       background-color: white;
       padding: 10px;
+
+      button {
+        width: 95% !important;
+        background-color: #ffd814;
+        border: none;
+        color: black;
+        margin: 0.2rem 0;
+      }
 
       .whatsapp {
         position: absolute;
@@ -53,9 +63,6 @@
         -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.19);
         box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.19);
       }
-
-
-
     }
   }
 
@@ -104,11 +111,12 @@
     h6 {
       font-size: 0.9rem;
       line-height: 2;
-      white-space: nowrap;     
-      overflow: hidden; 
+      white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
       color: #fd384f;
       font-weight: 800;
     }
   }
 }
+

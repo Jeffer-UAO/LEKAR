@@ -16,10 +16,11 @@
   background-color: rgb(241, 241, 241);
 
   button {
-    width: 100% !important;
+    width: 95% !important;
     background-color: #ffd814;
     border: none;
     color: black;
+    margin: 0.2rem 0;
   }
 
   &__product {
@@ -53,18 +54,11 @@
         font-size: 1.2rem;
         color: #fd384f;
         font-weight: 800;
-        overflow: hidden;     
+        overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      h6 {
 
-        color: #fd384f;
-        font-size: 0.8rem;
-        margin-right: 0.5rem;
-        overflow: hidden;      
-        text-overflow: ellipsis;
-      }
 
       .whatsapp {
         margin: 0.1rem;
@@ -78,13 +72,16 @@
     }
 
     h5 {
-      font-size: 16px;
+      font-size: 0.9rem;
     }
 
     h6 {
-      font-size: 12px;
-      padding-left: 5px;
-      text-align: start;
+      color: #999898;
+      font-size: 0.9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+
   }
 }

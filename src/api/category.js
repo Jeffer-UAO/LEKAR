@@ -1,4 +1,5 @@
 import { BASE_API } from "../config/constants";
+import { size } from "lodash";
 
 export class Categories {
   async getAll() {
@@ -15,6 +16,7 @@ export class Categories {
   }
 
   async getBySlug(slug) {
+
     try {
       const slugFilter = `slug=${slug}`;
       const url = `${BASE_API}/api/category/?${slugFilter}`;

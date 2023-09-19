@@ -43,7 +43,7 @@ export function Footer() {
         <div className={styles.link}>
           {map(categories, (category) => (
             <p key={category.id}>
-              <Link href={`/products/${category.slug}`}>{category.name}</Link>
+              <Link href={`/products/${category.slug}`}> {category.name} </Link>
             </p>
           ))}
         </div>

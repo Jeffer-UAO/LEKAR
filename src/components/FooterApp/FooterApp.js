@@ -3,7 +3,7 @@ import { useCart } from "@/hooks/useCart";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
 
 import { AiOutlineHome, AiOutlineShoppingCart } from "react-icons/ai";
-import { MdOutlineCategory } from "react-icons/md";
+import { BsSearch } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { BsWhatsapp } from "react-icons/bs";
 
@@ -48,7 +48,7 @@ export function FooterApp() {
         <BtnLink
           link={"/featured"}
           title={"EXCL"}
-          logo={<MdOutlineCategory size={20} />}
+          logo={<BsSearch size={20} />}
         />
 
         <Button
@@ -69,8 +69,7 @@ export function FooterApp() {
         </div>
 
         <BtnLink
-          // link={"https://lekar.catalogointeractivo.com.co/admin-dashboard/"}
-          link={"https://planos.centronube.com/admin-dashboard/"}
+          link={"https://lekar.catalogointeractivo.com.co/admin-dashboard/"}
           title={"ADMI"}
           logo={<CiUser size={20} />}
         />

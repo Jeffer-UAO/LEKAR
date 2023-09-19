@@ -59,12 +59,14 @@ export default function CartPage() {
             newObjectArray.push({
               Producto: newRecord.name_extend,
               Referencia: newRecord.ref,
+              Cantidad: newRecord.quantity,
               Imagen: BASE_NAME + newRecord.images,
             },);
           } else {
             newObjectArray.push({
               Producto: newRecord.name_extend,
               Referencia: newRecord.ref,
+              Cantidad: newRecord.quantity,
               Imagen: newRecord.image_alterna,
             },);
           }

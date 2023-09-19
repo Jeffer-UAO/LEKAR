@@ -61,18 +61,22 @@ export class Products {
   }
 
   async getProductByName(flag) {
-    try {
-      const productFilter = `flag=${flag}`;
+    if (flag != "") {
+      try {
+        const productFilter = `flag=${flag}`;
 
-      const url = `${BASE_API}/api/products/?${productFilter}`;
-      const response = await fetch(url);
-      const result = await response.json();
+        const url = `${BASE_API}/api/products/?${productFilter}`;
+        const response = await fetch(url);
+        const result = await response.json();
 
-      if (response.status !== 200) throw result;
+        if (response.status !== 200) throw result;
 
-      return result;
-    } catch (error) {
-      throw error;
+        return result;
+      } catch (error) {
+        throw error;
+      }
+    } else {
+      return null
     }
   }
 
