@@ -11,7 +11,7 @@
 // }
 
 .content {
-  padding: 0.5rem;
+  padding: 1rem;
   margin-bottom: 5rem;
 
   h1 {
@@ -25,26 +25,29 @@
 
   .list {
     display: grid;
-    gap: 0.5rem;
+    gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
     text-align: center;
 
     .card {
-      border: solid 1px rgba(238, 6, 6, 0.312);
       border-radius: 0.5rem;
       -webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.19);
       -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.19);
       box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.19);
+      .category {
+        padding: 0.3rem;
+        background-color: #e43235;
+      }
     }
 
     h2 {
       text-transform: uppercase;
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: rgb(136, 3, 172);
+      font-weight: 800;
+      font-size: 1rem;
+      color: rgb(255, 255, 255);
       overflow: hidden;
       text-overflow: ellipsis;
-      resize: both;
+     // resize: both;
     }
     img {
       object-fit: cover;

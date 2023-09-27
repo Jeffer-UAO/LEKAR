@@ -23,11 +23,12 @@ export function Redes() {
       </div>
 
       <div className={styles.contact}>
-        <h3 className={styles.phone}>386 4642</h3>
+        <h5 className={styles.phone}>374 7214</h5>
 
         <div className={styles.redes}>
-          <p> <IoLogoWhatsapp color="green"/> Cel: 320 771 3003</p>
+          <p> Cel: 320 771 3003</p>
           <p>lekarventas@gmail.com</p>
+          <p>Cra. 16 No. 22-39 CALI</p>
         </div>
       </div>
     </div>

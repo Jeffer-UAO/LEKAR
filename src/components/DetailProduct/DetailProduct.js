@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 import { ImageCarousel } from "../ImageCarousel";
 
-import { FichaTecnica } from "../FichaTecnica";
 import {
   CardImg,
   CardTitle,

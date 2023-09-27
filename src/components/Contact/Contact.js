@@ -9,9 +9,10 @@ export function Contact() {
         <div className={styles.phone}>
         <h5>Líneas de atención</h5>
         <ul>
-        <li>(+57) 312 366 2711</li>
+        <li>(+602) 374 7214</li>
+          <li>(+57) 310 400 4309</li>
           <li>(+57) 320 771 3003</li>
-          <li>(+602) 386 4642</li>
+          <li>(+57) 312 366 2711</li>
         </ul>
       </div>
 
