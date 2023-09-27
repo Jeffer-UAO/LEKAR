@@ -28,8 +28,10 @@ export function DetailProduct(props) {
   const { getGalleryByCode, gallery, loading, error } = useGallery();
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
+  const { ...productDetall } = product;
+ 
 
-  const [productData, setProductData] = useState("");
+  const [productData, setProductData] = useState(productDetall[0]);
   const [idProduct, setIdPropduct] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -41,13 +43,11 @@ export function DetailProduct(props) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Cambia 'es-ES' por tu configuración regional
   };
 
+
   useEffect(() => {
     getGalleryByCode(productData.codigo);
   }, []);
 
-  useEffect(() => {
-    setProductData(product[0]);
-  }, []);
 
   const changeDetail = (data) => {
     setProductData(data);
@@ -112,23 +112,14 @@ export function DetailProduct(props) {
     }
   };
 
-  const gallerySize = size(gallery);
-
   if (product) {
     return (
       <>
         <div className={styles.detailProduct}>
           <div className={styles.product} id="seccion-1">
-            {gallerySize > 0 ? (
-              <ImageCarousel images={gallery} />
-            ) : productData.image ? (
-              <CardImg
-                alt="Card image cap"
-                src={BASE_NAME + productData.image}
-              />
-            ) : (
-              <CardImg alt="Card image cap" src={productData.image_alterna} />
-            )}
+
+
+            <ImageCarousel images={gallery} />
 
             <div className={styles.description}>
               <CardTitle className={styles.title}>
@@ -151,11 +142,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductToWhatsApp(
                       productData.images +
-                        " " +
-                        productData.name_extend +
-                        " " +
-                        "Referencia: " +
-                        productData.ref
+                      " " +
+                      productData.name_extend +
+                      " " +
+                      "Referencia: " +
+                      productData.ref
                     )
                   }
                 >
@@ -167,11 +158,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductAlternaToWhatsApp(
                       productData.image_alterna +
-                        " " +
-                        productData.name_extend +
-                        " " +
-                        "Referencia: " +
-                        productData.ref
+                      " " +
+                      productData.name_extend +
+                      " " +
+                      "Referencia: " +
+                      productData.ref
                     )
                   }
                 >

@@ -3,21 +3,20 @@
   width: 100%;
 
   img {
-    
     object-fit: cover;
     object-position: center center;
     aspect-ratio: 1/1;
     max-width: 400px;
   }
   h6 {
-    white-space: nowrap;     
-    overflow: hidden; 
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
     color: #b3b3b3;
   }
 
   .product {
-
+    margin-top: 1px;
     // background-color: rgba(233, 234, 234, 0.344);
     .title {
       .name_extend {
@@ -25,11 +24,10 @@
       }
 
       .price {
-
         justify-content: center;
         align-items: center;
 
-        >h5 {
+        > h5 {
           font-size: 1.2rem;
           color: #fd384f;
           font-weight: 600;
@@ -119,4 +117,3 @@
     }
   }
 }
-
