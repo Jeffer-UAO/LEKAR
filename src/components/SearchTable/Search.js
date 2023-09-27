@@ -52,7 +52,7 @@ export function Search(props) {
                     <h6>$ {format(product.price1)}</h6>
                   )}
                   {product.price2 !== null && (
-                    <h6>$ {format(product.price1)}</h6>
+                    <h6>$ {format(product.price2)}</h6>
                   )}
 
                   <h5>Disponible: {product.qty}</h5>
