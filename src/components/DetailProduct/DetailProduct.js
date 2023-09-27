@@ -28,7 +28,7 @@ export function DetailProduct(props) {
   const { getGalleryByCode, gallery, loading, error } = useGallery();
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
-  const { ...productDetall } = product;
+  const { ...productDetall } = product ?? {}
  
 
   const [productData, setProductData] = useState(productDetall[0]);
