@@ -11,7 +11,7 @@ export function ImageCarousel(props) {
   
 
   return (
-    <Carousel   stopOnHover={true}  autoPlay={true}  infiniteLoop={true} showThumbs={false} preventMovementUntilSwipeScrollTolerance={true}>
+    <Carousel  infiniteLoop={true} showThumbs={false} preventMovementUntilSwipeScrollTolerance={true}>
       {map(images, (image, index) => (
         <div className={styles.carousel}  key={index}>
           <CardImg  alt={`Slide ${index}`} src={ image.image_alterna} />
