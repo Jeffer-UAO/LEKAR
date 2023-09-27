@@ -28,8 +28,7 @@ export function DetailProduct(props) {
   const { getGalleryByCode, gallery, loading, error } = useGallery();
   const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
     useWhatsApp();
-  const { ...productDetall } = product ?? {}
- 
+  const { ...productDetall } = product ?? {};
 
   const [productData, setProductData] = useState(productDetall[0]);
   const [idProduct, setIdPropduct] = useState();
@@ -40,14 +39,12 @@ export function DetailProduct(props) {
   const [quantity, setQuantity] = useState(1);
 
   const format = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Cambia 'es-ES' por tu configuración regional
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-
 
   useEffect(() => {
     getGalleryByCode(productData.codigo);
   }, []);
-
 
   const changeDetail = (data) => {
     setProductData(data);
@@ -117,8 +114,6 @@ export function DetailProduct(props) {
       <>
         <div className={styles.detailProduct}>
           <div className={styles.product} id="seccion-1">
-
-
             <ImageCarousel images={gallery} />
 
             <div className={styles.description}>
@@ -142,11 +137,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductToWhatsApp(
                       productData.images +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                        " " +
+                        productData.name_extend +
+                        " " +
+                        "Referencia: " +
+                        productData.ref
                     )
                   }
                 >
@@ -158,11 +153,11 @@ export function DetailProduct(props) {
                   onClick={() =>
                     addProductAlternaToWhatsApp(
                       productData.image_alterna +
-                      " " +
-                      productData.name_extend +
-                      " " +
-                      "Referencia: " +
-                      productData.ref
+                        " " +
+                        productData.name_extend +
+                        " " +
+                        "Referencia: " +
+                        productData.ref
                     )
                   }
                 >
