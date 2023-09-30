@@ -23,7 +23,7 @@ export function Redes() {
       </div>
 
       <div className={styles.contact}>
-        <h5 className={styles.phone}>374 7214</h5>
+        <h5 className={styles.phone}>(602) 374 7214</h5>
 
         <div className={styles.redes}>
           <p> Cel: 320 771 3003</p>
