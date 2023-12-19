@@ -135,7 +135,7 @@ export function Available(props) {
         Agregar al Carrito
       </Button>
 
-      <Modal isOpen={isOpen} toggle={toggleModal}>
+      <Modal centered isOpen={isOpen} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Ingrese Cantidad</ModalHeader>
 
         <ModalBody>
